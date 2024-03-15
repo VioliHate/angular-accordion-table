@@ -1,26 +1,23 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col">#</th>
-    <th scope="col">First Name</th>
-    <th scope="col">Last Name</th>
-    <th scope="col">Birthdate</th>
+    <th  *ngFor="let header of headers" scope="col">{{header.name}}</th>
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let row of rows; let i = index">
+  <ng-container *ngFor="let row of data; let i = index">
     <tr data-toggle="collapse" [attr.data-target]="'#rowDetails' + i" aria-expanded="false" aria-controls="rowDetails" (click)="toggleCollapse(i)">
-      <th scope="row">{{ row.id }}</th>
-      <td>{{ row.name }}</td>
-      <td>{{ row.lastname }}</td>
-      <td>{{ row.birthdate }}</td>
+      <td *ngFor="let header of headers">{{ row[header.value] ?? '-'}}</td>
     </tr>
     <tr>
       <td colspan="4" class="hiddenRow">
         <div id="rowDetails{{ i }}" class="collapse" [collapse]="collapseStates[i]" [@expandCollapse]="collapseStates[i]">
           <div class="card card-body">
             <!-- Dettagli aggiuntivi dell'utente -->
-            <p>Details: {{ row.text }}</p>
+            <p *ngFor="let extra of extras" >
+              <span>{{extra.name}}</span> :
+              <span>{{ row[extra.value ?? '-'] }}</span>
+              <br></p>
           </div>
         </div>
       </td>
