@@ -2,6 +2,16 @@
   <app-expandable-table
   [data]="data"
   [headers]="headers"
-  [extras]="extras">
+  [extras]="extras"
+  [templateRef]="templateRef">
   </app-expandable-table>
 </div>
+
+
+<ng-template #templateRef let-extra="extra" let-row="row">
+  <p>
+    <span>{{extra?.name}}</span> :
+    <span>{{row[extra?.value]}}</span>
+    <br>
+  </p>
+</ng-template>

@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, TemplateRef} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Header} from "../../models/header";
 
@@ -19,6 +19,7 @@ export class ExpandableTableComponent implements AfterViewInit{
   @Input() data: any[] = [];
   @Input() headers: Header [] = [];
   @Input() extras: Header [] = [];
+  @Input() templateRef: TemplateRef<any> = {} as TemplateRef<any> ;
   collapseStates: { [key: number]: boolean } = {};
 
 
@@ -31,12 +32,10 @@ export class ExpandableTableComponent implements AfterViewInit{
 
   toggleCollapse(rowId: number) {
     this.collapseStates[rowId] = !this.collapseStates[rowId];
-    this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
 
   }
 
   ngAfterViewInit() {
-    console.log(this.extras);
     for (let i = 0; i < this.data.length; i++) {
       this.collapseStates[i] = true; // Inizializza tutti i collapse come aperti
     }

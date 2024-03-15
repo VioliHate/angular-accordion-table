@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
 
 @Component({
@@ -8,6 +8,7 @@ import {Header} from "../../models/header";
 })
 export class DashboardComponent implements OnInit{
 
+  @ViewChild('templateRef', { static: true }) templateRef!: TemplateRef<any>;
   data:any [] = [];
   headers: Header[] = [];
   extras: Header[] = [
