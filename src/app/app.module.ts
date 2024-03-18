@@ -8,6 +8,8 @@ import { ExpandableTableComponent } from './components/expandable-table/expandab
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CollapseModule} from "ngx-bootstrap/collapse";
 import { ShowDataObjectComponent } from './components/show-data-object/show-data-object.component';
+import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ShowDataObjectComponent } from './components/show-data-object/show-data
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    NgbPagination,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
