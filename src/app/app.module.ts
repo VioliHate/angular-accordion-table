@@ -7,12 +7,14 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ExpandableTableComponent } from './components/expandable-table/expandable-table.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CollapseModule} from "ngx-bootstrap/collapse";
+import { ShowDataObjectComponent } from './components/show-data-object/show-data-object.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ExpandableTableComponent
+    ExpandableTableComponent,
+    ShowDataObjectComponent
   ],
   imports: [
     BrowserModule,

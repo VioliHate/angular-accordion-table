@@ -1,5 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
+import {Contact} from "../../models/example-model";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,57 +10,179 @@ import {Header} from "../../models/header";
 export class DashboardComponent implements OnInit{
 
   @ViewChild('templateRef', { static: true }) templateRef!: TemplateRef<any>;
+
   data:any [] = [];
   headers: Header[] = [];
-  extras: Header[] = [
-    {name: 'Email', value: 'email'},
-    {name: 'Telefono', value: 'phone'}
-  ];
+  extras: Header[] = [];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.data = [{
-      id:'0001',
-      name: 'Mario',
-      lastname: 'Rossi',
-      birthdate: '11/03/1989',
-      email: 'mario-rossi@email.com',
-      phone:'123456789'
-    },
+    this.data = [
       {
-        id:'0002',
-        name: 'Marco',
-        lastname: 'Bianchi',
-        birthdate: '21/08/1990',
-        email: 'bianchi.marco@email.it',
-        phone:'000000000'
-
+        "id": 1,
+        "firstName": "Mario",
+        "lastName": "Rossi",
+        "birthDate": "1980-05-15",
+        "address": {
+          "street": "Via Roma 123",
+          "city": "Roma",
+          "postalCode": "00100"
+        },
+        "contact": {
+          "email": "mario.rossi@example.com",
+          "phoneNumber": "+39 0123456789"
+        }
       },
       {
-        id:'0003',
-        name: 'Stefania',
-        lastname: 'Viola',
-        birthdate: '01/01/1995',
-        email: 'violste95@example.it',
-        phone:'010203040'
+        "id": 2,
+        "firstName": "Anna",
+        "lastName": "Bianchi",
+        "birthDate": "1992-08-25",
+        "address": {
+          "street": "Via Milano 456",
+          "city": "Milano",
+          "postalCode": "20100"
+        },
+        "contact": {
+          "email": "anna.bianchi@example.com",
+          "phoneNumber": "+39 0987654321"
+        }
       },
       {
-        id:'0004',
-        name: 'Babbo',
-        lastname: 'Natale',
-        birthdate: '31/12/0000',
-        email: 'natalebabbp@dicembre.it',
-        phone:'112233445'
+        "id": 3,
+        "firstName": "Stefano",
+        "lastName": "Verdi",
+        "birthDate": "1975-12-10",
+        "address": {
+          "street": "Corso Venezia 789",
+          "city": "Torino",
+          "postalCode": "10100"
+        },
+        "contact": {
+          "email": "stefano.verdi@example.com",
+          "phoneNumber": "+39 0369876543"
+        }
       },
+      {
+        "id": 4,
+        "firstName": "Giovanna",
+        "lastName": "Ferrari",
+        "birthDate": "1988-07-03",
+        "address": {
+          "street": "Piazza Garibaldi 12",
+          "city": "Firenze",
+          "postalCode": "50100"
+        },
+        "contact": {
+          "email": "giovanna.ferrari@example.com",
+          "phoneNumber": "+39 0276543210"
+        }
+      },
+      {
+        "id": 5,
+        "firstName": "Luca",
+        "lastName": "Russo",
+        "birthDate": "1995-03-20",
+        "address": {
+          "street": "Via Veneto 567",
+          "city": "Napoli",
+          "postalCode": "80100"
+        },
+        "contact": {
+          "email": "luca.russo@example.com",
+          "phoneNumber": "+39 0333333333"
+        }
+      },
+      {
+        "id": 6,
+        "firstName": "Elena",
+        "lastName": "Galli",
+        "birthDate": "1983-11-12",
+        "address": {
+          "street": "Piazza Duomo 21",
+          "city": "Bologna",
+          "postalCode": "40100"
+        },
+        "contact": {
+          "email": "elena.galli@example.com",
+          "phoneNumber": "+39 0444444444"
+        }
+      },
+      {
+        "id": 7,
+        "firstName": "Marco",
+        "lastName": "Conti",
+        "birthDate": "1970-09-08",
+        "address": {
+          "street": "Via Garibaldi 89",
+          "city": "Palermo",
+          "postalCode": "90100"
+        },
+        "contact": {
+          "email": "marco.conti@example.com",
+          "phoneNumber": "+39 0555555555"
+        }
+      },
+      {
+        "id": 8,
+        "firstName": "Laura",
+        "lastName": "Martini",
+        "birthDate": "1990-01-30",
+        "address": {
+          "street": "Corso Italia 123",
+          "city": "Genova",
+          "postalCode": "30100"
+        },
+        "contact": {
+          "email": "laura.martini@example.com",
+          "phoneNumber": "+39 0666666666"
+        }
+      },
+      {
+        "id": 9,
+        "firstName": "Alessandro",
+        "lastName": "Ferraro",
+        "birthDate": "1986-06-17",
+        "address": {
+          "street": "Via Garibaldi 456",
+          "city": "Verona",
+          "postalCode": "37100"
+        },
+        "contact": {
+          "email": "alessandro.ferraro@example.com",
+          "phoneNumber": "+39 0777777777"
+        }
+      },
+      {
+        "id": 10,
+        "firstName": "Giulia",
+        "lastName": "Moretti",
+        "birthDate": "1978-12-05",
+        "address": {
+          "street": "Piazza San Marco 32",
+          "city": "Venezia",
+          "postalCode": "30100"
+        },
+        "contact": {
+          "email": "giulia.moretti@example.com",
+          "phoneNumber": "+39 0888888888"
+        }
+      }
     ];
+
 
     this.headers = [
       {name: 'ID', value:'id'},
-      {name: 'Nome', value: 'name'},
-      {name: 'Cognome', value: 'lastname'},
-      {name: 'Data di nascita', value: 'birthdate'}
+      {name: 'Nome', value: 'firstName'},
+      {name: 'Cognome', value: 'lastName'},
+      {name: 'Data di nascita', value: 'birthDate'}
+    ];
+
+    this.extras = [
+      {name: 'Contatto', value: 'contact'},
+      {name: 'Indirizzo', value: 'address'}
     ];
   }
 

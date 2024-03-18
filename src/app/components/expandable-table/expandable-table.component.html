@@ -12,12 +12,19 @@
     <tr>
       <td colspan="4" class="hiddenRow">
         <div id="rowDetails{{ i }}" class="collapse card card-body" [collapse]="collapseStates[i]" [@expandCollapse]="collapseStates[i]" >
-          <div class="" *ngFor="let extra of extras">
-            <!-- Dettagli aggiuntivi dell'utente -->
-            <ng-container [ngTemplateOutlet]="templateRef"
-                          [ngTemplateOutletContext]="{ $implicit: '-', extra: extra, row: row }"></ng-container>
+<!--          <div class="" *ngFor="let extra of extras">-->
+<!--            {{extra.value}}-->
+<!--            &lt;!&ndash; Dettagli aggiuntivi dell'utente &ndash;&gt;-->
+<!--            <ng-container [ngTemplateOutlet]="templateRef"-->
+<!--                          [ngTemplateOutletContext]="{ $implicit: '-', extra: extra, row: row }"></ng-container>-->
+            <div>
+              <div *ngFor="let extra of extras">
+                {{ extra.name }} :
+                <app-show-data-object *ngIf="isObject(row[extra.value])" [data]="row[extra.value]"></app-show-data-object>
+              </div>
+            </div>
           </div>
-        </div>
+<!--        </div>-->
       </td>
     </tr>
   </ng-container>

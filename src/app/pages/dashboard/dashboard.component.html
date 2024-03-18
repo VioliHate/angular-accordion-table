@@ -7,8 +7,7 @@
   </app-expandable-table>
 </div>
 
-
-<ng-template #templateRef let-extra="extra" let-row="row">
+<ng-template #templateRef let-extra="extra" let-row="row" >
   <p>
     <span>{{extra?.name}}</span> :
     <span>{{row[extra?.value]}}</span>

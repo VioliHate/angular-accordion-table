@@ -41,4 +41,10 @@ export class ExpandableTableComponent implements AfterViewInit{
     }
     this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
   }
+
+  isObject(input: any) {
+    return typeof input === 'object';
+  }
+
+  protected readonly Object = Object;
 }
