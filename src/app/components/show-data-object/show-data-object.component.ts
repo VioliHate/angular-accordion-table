@@ -1,4 +1,4 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Header} from "../../models/header";
 
 @Component({
@@ -9,6 +9,10 @@ import {Header} from "../../models/header";
 export class ShowDataObjectComponent {
 
   @Input() data!: any[];
+
+  /**
+   * che informazioni voglio mostrare e che nome devo mostrare
+   * */
   @Input() deepDisplay!: Header[]
   protected readonly Object = Object;
 

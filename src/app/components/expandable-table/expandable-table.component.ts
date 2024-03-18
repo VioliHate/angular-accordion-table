@@ -8,21 +8,41 @@ import {Header} from "../../models/header";
   styleUrl: './expandable-table.component.scss',
   animations: [
   trigger('expandCollapse', [
-    state(`${true}`, style({ height: '0px'})),
-    state(`${false}`, style({ height: '*'})),
+    state(`${true}`, style({ height: '0px', opacity: '0'})),
+    state(`${false}`, style({ height: '*', opacity: '1'})),
     transition(`${true}`+' <=> '+`${false}`, [animate('350ms cubic-bezier(0.4, 0.0, 0.2, 1)')])
   ])]
 })
 
 export class ExpandableTableComponent implements AfterViewInit{
 
+  /**
+   * i dati da visualizzare
+   * */
   @Input() data: any[] = [];
+  /**
+   * Le colonne da mostrare in tabella
+   * */
   @Input() headers: Header [] = [];
+
+  /**
+   * Le informazioni che si vuole mostrare nel dettaglio
+   * */
   @Input() extras: Header [] = [];
+
+  /**
+   * Il riferimento Template per la costruzione grafica della visualizzazione dei dettagli della tabella
+   *
+   * */
   @Input() templateRef: TemplateRef<any> = {} as TemplateRef<any> ;
   @Input() maxSize: number = 5;
   @Input() pageSize: number = 2;
   @Input() page: number = 1;
+
+  /**
+   * gestione apertura dettaglio se true può esserci solo un dettaglio aperto alla volta,
+   * false possono esserci più dettagli aperti contemporaneamente
+   * */
   @Input() singleOpen: boolean = false;
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
