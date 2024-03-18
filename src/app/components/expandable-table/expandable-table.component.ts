@@ -10,7 +10,7 @@ import {Header} from "../../models/header";
   trigger('expandCollapse', [
     state(`${true}`, style({ height: '0px'})),
     state(`${false}`, style({ height: '*'})),
-    transition(`${true}`+' <=> '+`${false}`, [animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')])
+    transition(`${true}`+' <=> '+`${false}`, [animate('350ms cubic-bezier(0.4, 0.0, 0.2, 1)')])
   ])]
 })
 
@@ -23,6 +23,7 @@ export class ExpandableTableComponent implements AfterViewInit{
   @Input() maxSize: number = 5;
   @Input() pageSize: number = 2;
   @Input() page: number = 1;
+  @Input() singleOpen: boolean = false;
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -36,15 +37,19 @@ export class ExpandableTableComponent implements AfterViewInit{
   }
 
   toggleCollapse(rowId: number) {
-    this.collapseStates[rowId] = !this.collapseStates[rowId];
+    if(!this.singleOpen) {
+      this.collapseStates[rowId] = !this.collapseStates[rowId];
+    }else{
+      if (this.collapseStates[rowId]) {
+        this.initiateCollapse();
+      }
+      this.collapseStates[rowId] = !this.collapseStates[rowId];
+    }
 
   }
 
   ngAfterViewInit() {
-    for (let i = 0; i < this.data.length; i++) {
-      this.collapseStates[i] = true; // Inizializza tutti i collapse come aperti
-    }
-    this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
+    this.initiateCollapse();
   }
 
 
@@ -52,5 +57,17 @@ export class ExpandableTableComponent implements AfterViewInit{
     const startIndex = (this.page - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     return this.data.slice(startIndex, endIndex);
+  }
+
+
+  private initiateCollapse(){
+    for (let i = 0; i < this.data.length; i++) {
+      this.collapseStates[i] = true; // Inizializza tutti i collapse come aperti
+    }
+    this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
+  }
+
+  changePage() {
+    this.initiateCollapse();
   }
 }

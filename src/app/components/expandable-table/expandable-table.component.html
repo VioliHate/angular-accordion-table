@@ -31,7 +31,7 @@
     [maxSize]="maxSize"
     [pageSize]="pageSize"
     [rotate]="true"
-    (pageChange)="pageChange.emit($event)">
+    (pageChange)="changePage()">
   </ngb-pagination>
   <select name="pageSize" [(ngModel)]="pageSize" class="h-100 align-content-center">
     <option [ngValue]="2">2</option>
