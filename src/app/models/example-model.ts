@@ -12,11 +12,11 @@ export class Address {
 
 export class Contact {
   email: string;
-  phoneNumber: string;
+  phoneNumber: Phone;
 
   constructor() {
     this.email = '';
-    this.phoneNumber = '';
+    this.phoneNumber = new Phone();
   }
 }
 
@@ -34,7 +34,17 @@ export class User {
     this.lastName = '';
     this.birthDate = '';
     this.address = {street:'', city:'', postalCode:''};
-    this.contact = {email:'', phoneNumber:''};
+    this.contact = {email:'', phoneNumber: new Phone()};
+  }
+}
+
+export class Phone {
+  prefix: string;
+  number: string;
+
+  constructor() {
+    this.prefix = '';
+    this.number = '';
   }
 }
 

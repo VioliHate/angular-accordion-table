@@ -1,30 +1,24 @@
 <table class="table">
   <thead>
   <tr>
-    <th  *ngFor="let header of headers" scope="col">{{header.name}}</th>
+    <th *ngFor="let header of headers" scope="col">{{header.name}}</th>
   </tr>
   </thead>
   <tbody>
   <ng-container *ngFor="let row of data; let i = index">
-    <tr data-toggle="collapse" [attr.data-target]="'#rowDetails' + i" aria-expanded="false" aria-controls="rowDetails" (click)="toggleCollapse(i)">
+    <tr data-toggle="collapse" [attr.data-target]="'#rowDetails' + i" aria-expanded="false" aria-controls="rowDetails"
+        (click)="toggleCollapse(i)">
       <td *ngFor="let header of headers">{{ row[header.value] ?? '-'}}</td>
     </tr>
     <tr>
       <td colspan="4" class="hiddenRow">
-        <div id="rowDetails{{ i }}" class="collapse card card-body" [collapse]="collapseStates[i]" [@expandCollapse]="collapseStates[i]" >
-<!--          <div class="" *ngFor="let extra of extras">-->
-<!--            {{extra.value}}-->
-<!--            &lt;!&ndash; Dettagli aggiuntivi dell'utente &ndash;&gt;-->
-<!--            <ng-container [ngTemplateOutlet]="templateRef"-->
-<!--                          [ngTemplateOutletContext]="{ $implicit: '-', extra: extra, row: row }"></ng-container>-->
-            <div>
-              <div *ngFor="let extra of extras">
-                {{ extra.name }} :
-                <app-show-data-object *ngIf="isObject(row[extra.value])" [data]="row[extra.value]"></app-show-data-object>
-              </div>
-            </div>
+        <div id="rowDetails{{ i }}" class="collapse card card-body" [collapse]="collapseStates[i]"
+             [@expandCollapse]="collapseStates[i]">
+          <div *ngFor="let extra of extras">
+            <ng-container [ngTemplateOutlet]="templateRef"
+                          [ngTemplateOutletContext]="{ $implicit: '-', extra: extra, row: row }"></ng-container>
           </div>
-<!--        </div>-->
+        </div>
       </td>
     </tr>
   </ng-container>

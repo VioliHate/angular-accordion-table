@@ -7,10 +7,10 @@
   </app-expandable-table>
 </div>
 
+
 <ng-template #templateRef let-extra="extra" let-row="row" >
   <p>
     <span>{{extra?.name}}</span> :
-    <span>{{row[extra?.value]}}</span>
-    <br>
+    <app-show-data-object *ngIf="isObject(row[extra?.value])" [data]="row[extra?.value]" [deepDisplay]="deepDisplay"></app-show-data-object>
   </p>
 </ng-template>

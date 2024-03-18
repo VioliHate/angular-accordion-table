@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
-import {Contact} from "../../models/example-model";
+import {Contact, Phone} from "../../models/example-model";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit{
   data:any [] = [];
   headers: Header[] = [];
   extras: Header[] = [];
+  deepDisplay: Header[] = [];
 
   constructor() {
   }
@@ -32,7 +33,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "mario.rossi@example.com",
-          "phoneNumber": "+39 0123456789"
+          "phone": {
+            "prefix":"+39",
+            "number":"0123456789"
+          }
         }
       },
       {
@@ -47,7 +51,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "anna.bianchi@example.com",
-          "phoneNumber": "+39 0987654321"
+          "phone": {
+            "prefix":"+39",
+            "number":"0987654321"
+          }
         }
       },
       {
@@ -62,7 +69,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "stefano.verdi@example.com",
-          "phoneNumber": "+39 0369876543"
+          "phone": {
+            "prefix":"+39",
+            "number":"0369876543"
+          }
         }
       },
       {
@@ -77,7 +87,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "giovanna.ferrari@example.com",
-          "phoneNumber": "+39 0276543210"
+          "phone": {
+            "prefix":"+39",
+            "number":"0276543210"
+          }
         }
       },
       {
@@ -92,7 +105,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "luca.russo@example.com",
-          "phoneNumber": "+39 0333333333"
+          "phone": {
+            "prefix":"+39",
+            "number":"0333333333"
+          }
         }
       },
       {
@@ -107,7 +123,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "elena.galli@example.com",
-          "phoneNumber": "+39 0444444444"
+          "phone": {
+            "prefix":"+39",
+            "number":"0444444444"
+          }
         }
       },
       {
@@ -122,7 +141,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "marco.conti@example.com",
-          "phoneNumber": "+39 0555555555"
+          "phone": {
+            "prefix":"+39",
+            "number":"0555555555"
+          }
         }
       },
       {
@@ -137,7 +159,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "laura.martini@example.com",
-          "phoneNumber": "+39 0666666666"
+          "phone": {
+            "prefix":"+39",
+            "number":"0666666666"
+          }
         }
       },
       {
@@ -152,7 +177,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "alessandro.ferraro@example.com",
-          "phoneNumber": "+39 0777777777"
+          "phone": {
+            "prefix":"+39",
+            "number":"0777777777"
+          }
         }
       },
       {
@@ -167,7 +195,10 @@ export class DashboardComponent implements OnInit{
         },
         "contact": {
           "email": "giulia.moretti@example.com",
-          "phoneNumber": "+39 0888888888"
+          "phone": {
+            "prefix":"+39",
+            "number":"0888888888"
+          }
         }
       }
     ];
@@ -184,6 +215,20 @@ export class DashboardComponent implements OnInit{
       {name: 'Contatto', value: 'contact'},
       {name: 'Indirizzo', value: 'address'}
     ];
+
+    this.deepDisplay = [
+      {name: 'Email', value:'email'},
+      {name: 'Telefono', value:'number'},
+      {name: 'Via', value:'street'},
+    ]
+
+
   }
 
+
+  isObject(input: any) {
+    return typeof input === 'object';
+  }
+
+  protected readonly Object = Object;
 }

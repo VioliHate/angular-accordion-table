@@ -1,4 +1,5 @@
 import {Component, Input, input} from '@angular/core';
+import {Header} from "../../models/header";
 
 @Component({
   selector: 'app-show-data-object',
@@ -7,10 +8,20 @@ import {Component, Input, input} from '@angular/core';
 })
 export class ShowDataObjectComponent {
 
-    @Input() data!: any[];
-    protected readonly Object = Object;
+  @Input() data!: any[];
+  @Input() deepDisplay!: Header[]
+  protected readonly Object = Object;
 
-    isObject(input: any) {
+  isObject(input: any) {
     return typeof input === 'object';
+  }
+
+  displayKey(key: string): any {
+    return this.deepDisplay.find(iter => {
+      if (iter && iter.value === key) {
+        return iter.name;
+      }
+      return false;
+    });
   }
 }
