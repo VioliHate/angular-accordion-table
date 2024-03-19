@@ -21,6 +21,10 @@ export class ExpandableTableComponent implements AfterViewInit{
    * */
   @Input() data: any[] = [];
   /**
+   * i dettagli da visualizzare
+   * */
+  @Input() dataDetails: any[] = [];
+  /**
    * Le colonne da mostrare in tabella
    * */
   @Input() headers: Header [] = [];
@@ -35,6 +39,7 @@ export class ExpandableTableComponent implements AfterViewInit{
    *
    * */
   @Input() templateRef: TemplateRef<any> = {} as TemplateRef<any> ;
+
   @Input() maxSize: number = 5;
   @Input() pageSize: number = 2;
   @Input() page: number = 1;
@@ -46,6 +51,7 @@ export class ExpandableTableComponent implements AfterViewInit{
   @Input() singleOpen: boolean = false;
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() detailsEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   collapseStates: { [key: number]: boolean } = {};
 
@@ -56,7 +62,10 @@ export class ExpandableTableComponent implements AfterViewInit{
   ngOnInit(): void {
   }
 
-  toggleCollapse(rowId: number) {
+  toggleCollapse(row: any, rowId: number) {
+    if(this.collapseStates[rowId]){
+    this.detailsEmitter.emit({id: row.id} );
+    }
     if(!this.singleOpen) {
       this.collapseStates[rowId] = !this.collapseStates[rowId];
     }else{
@@ -73,7 +82,7 @@ export class ExpandableTableComponent implements AfterViewInit{
   }
 
 
-  getCurrentPageItems(): any[] {
+  getDataPaged(): any[] {
     const startIndex = (this.page - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     return this.data.slice(startIndex, endIndex);
@@ -89,5 +98,9 @@ export class ExpandableTableComponent implements AfterViewInit{
 
   changePage() {
     this.initiateCollapse();
+  }
+
+  clickNow(detail: any) {
+    console.log(detail);
   }
 }

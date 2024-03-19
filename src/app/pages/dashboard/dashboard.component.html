@@ -4,14 +4,17 @@
   [headers]="headers"
   [extras]="extras"
   [singleOpen]="true"
-  [templateRef]="templateRef">
+  [templateRef]="templateRef"
+  (detailsEmitter)="getDetails($event)"
+  [dataDetails]="dataDetails">
   </app-expandable-table>
 </div>
 
 
-<ng-template #templateRef let-extra="extra" let-row="row" >
+<ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" >
   <p>
-    <span>{{extra?.name}}</span> :
-    <app-show-data-object *ngIf="isObject(row[extra?.value])" [data]="row[extra?.value]" [deepDisplay]="deepDisplay"></app-show-data-object>
+    <span>{{detailLabel?.name}}</span> :
+    <app-show-data-object *ngIf="isObject(detailInfo[detailLabel?.value])"
+                          [data]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"></app-show-data-object>
   </p>
 </ng-template>

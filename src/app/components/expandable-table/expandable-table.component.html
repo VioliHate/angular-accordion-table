@@ -5,18 +5,20 @@
   </tr>
   </thead>
   <tbody>
-  <ng-container *ngFor="let row of getCurrentPageItems(); let i = index">
+  <ng-container *ngFor="let row of getDataPaged(); let i = index">
     <tr data-toggle="collapse" [attr.data-target]="'#rowDetails' + i" aria-expanded="false" aria-controls="rowDetails"
-        (click)="toggleCollapse(i)">
+        (click)="toggleCollapse(row, i)">
       <td *ngFor="let header of headers">{{ row[header.value] ?? '-'}}</td>
     </tr>
     <tr>
       <td colspan="4" class="hiddenRow">
         <div id="rowDetails{{ i }}" class="collapse card card-body" [collapse]="collapseStates[i]"
              [@expandCollapse]="collapseStates[i]">
-          <div *ngFor="let extra of extras">
+          <div *ngFor="let info of dataDetails">
+           <div *ngFor="let label of extras">
             <ng-container [ngTemplateOutlet]="templateRef"
-                          [ngTemplateOutletContext]="{ $implicit: '-', extra: extra, row: row }"></ng-container>
+                          [ngTemplateOutletContext]="{ $implicit: '-', detailLabel: label, detailInfo: info }"></ng-container>
+          </div>
           </div>
         </div>
       </td>

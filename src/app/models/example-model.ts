@@ -12,11 +12,11 @@ export class Address {
 
 export class Contact {
   email: string;
-  phoneNumber: Phone;
+  phone: Phone;
 
   constructor() {
     this.email = '';
-    this.phoneNumber = new Phone();
+    this.phone = new Phone();
   }
 }
 
@@ -34,7 +34,7 @@ export class User {
     this.lastName = '';
     this.birthDate = '';
     this.address = {street:'', city:'', postalCode:''};
-    this.contact = {email:'', phoneNumber: new Phone()};
+    this.contact = {email:'', phone: new Phone()};
   }
 }
 
