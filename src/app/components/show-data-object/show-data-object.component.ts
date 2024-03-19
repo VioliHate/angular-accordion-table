@@ -22,10 +22,24 @@ export class ShowDataObjectComponent {
 
   displayKey(key: string): any {
     return this.deepDisplay.find(iter => {
+      debugger;
       if (iter && iter.value === key) {
         return iter.name;
       }
       return false;
     });
+  }
+
+  getValueByPath(obj: any, path: string): any {
+    debugger;
+    const parts = path.split('.');
+    let value = obj;
+    for (const part of parts) {
+      if (value.hasOwnProperty(part)) {
+        value = value[part];
+      }
+    }
+    console.log(value);
+    return value;
   }
 }

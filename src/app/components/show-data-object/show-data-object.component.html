@@ -1,9 +1,6 @@
-<div>
-  <div *ngFor="let item of data | keyvalue">
-    <div *ngIf="displayKey(item.key)">
-      {{displayKey(item.key).name}}: <span *ngIf="!isObject(item.value)">{{ item.value }}</span>
-    </div>
-    <app-show-data-object *ngIf="isObject(item.value)" [data]="item.value"
-                          [deepDisplay]="deepDisplay"></app-show-data-object>
+<div *ngFor="let path of deepDisplay">
+  <div *ngIf="!isObject(getValueByPath(data, path.value))">
+    {{ path.name }} : {{ getValueByPath(data, path.value) }}
   </div>
 </div>
+

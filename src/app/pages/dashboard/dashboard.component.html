@@ -14,7 +14,6 @@
 <ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" >
   <p>
     <span>{{detailLabel?.name}}</span> :
-    <app-show-data-object *ngIf="isObject(detailInfo[detailLabel?.value])"
-                          [data]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"></app-show-data-object>
+    <app-show-data-object [data]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"></app-show-data-object>
   </p>
 </ng-template>

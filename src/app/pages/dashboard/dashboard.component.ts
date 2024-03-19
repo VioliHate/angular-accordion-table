@@ -31,9 +31,9 @@ export class DashboardComponent implements OnInit{
     ];
 
     this.deepDisplay = [
-      {name: 'Email', value:'email'},
-      {name: 'Telefono', value:'number'},
-      {name: 'Via', value:'street'},
+      {name: 'Email', value:'contact.email'},
+      {name: 'Telefono', value:'contact.phone.number'},
+      {name: 'Via', value:'address.street'},
     ]
   }
 
