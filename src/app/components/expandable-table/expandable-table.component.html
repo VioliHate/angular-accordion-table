@@ -1,5 +1,5 @@
 <table class="table">
-  <thead>
+  <thead [ngClass]="'thead-primary'">
   <tr>
     <th *ngFor="let header of headers" scope="col">{{header.name}}</th>
   </tr>
@@ -35,7 +35,7 @@
     [rotate]="true"
     (pageChange)="changePage()">
   </ngb-pagination>
-  <select name="pageSize" [(ngModel)]="pageSize" class="h-100 align-content-center">
+  <select name="pageSize" [(ngModel)]="pageSize" class="btn btn-primary">
     <option [ngValue]="2">2</option>
     <option [ngValue]="4">4</option>
     <option [ngValue]="10">10</option>

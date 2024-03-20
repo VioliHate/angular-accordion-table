@@ -1,6 +1,7 @@
 import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, TemplateRef} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Header} from "../../models/header";
+import {TableHeadTheme} from "twentyfive-style";
 
 @Component({
   selector: 'app-expandable-table',
@@ -118,4 +119,6 @@ export class ExpandableTableComponent implements AfterViewInit{
   changePage() {
     this.initiateCollapse();
   }
+
+  protected readonly TableHeadTheme = TableHeadTheme;
 }
