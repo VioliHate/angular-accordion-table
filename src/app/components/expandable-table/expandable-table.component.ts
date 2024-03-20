@@ -17,49 +17,69 @@ import {Header} from "../../models/header";
 export class ExpandableTableComponent implements AfterViewInit{
 
   /**
-   * i dati da visualizzare
+   * Data to display
    * */
   @Input() data: any[] = [];
   /**
-   * i dettagli da visualizzare
+   * The data details to display
    * */
   @Input() dataDetails: any[] = [];
+
   /**
-   * Le colonne da mostrare in tabella
+   * Data attributes and column headers to display in the table
    * */
   @Input() headers: Header [] = [];
 
   /**
-   * Le informazioni che si vuole mostrare nel dettaglio
+   * The details to be displayed: attribute
    * */
   @Input() extras: Header [] = [];
 
   /**
-   * Il riferimento Template per la costruzione grafica della visualizzazione dei dettagli della tabella
-   *
+   * The Template Reference for constructing the graphical display of table details.
    * */
   @Input() templateRef: TemplateRef<any> = {} as TemplateRef<any> ;
-
-  @Input() maxSize: number = 5;
-  @Input() pageSize: number = 2;
-  @Input() page: number = 1;
-
   /**
-   * gestione apertura dettaglio se true può esserci solo un dettaglio aperto alla volta,
-   * false possono esserci più dettagli aperti contemporaneamente
+   * If true, only one detail can be open at a time. If false, multiple details can be open simultaneously.
    * */
   @Input() singleOpen: boolean = false;
 
-  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+  // ngb-pagination
+  /**
+   * The maximum number of pages to display.
+   */
+  @Input() maxSize: number = 5;
+  /**
+   * The number of items per page.
+   */
+  @Input() pageSize: number = 2;
+  /**
+   * The current page.
+   * Page numbers start with 1.
+   */
+  @Input() page: number = 1;
+  /**
+   * If `true`, pagination links will be disabled.
+   */
+  @Input() disabled!: boolean;
+  /**
+   * If `true`, the "First" and "Last" page links are shown.
+   */
+  @Input() boundaryLinks!: boolean;
+  /**
+   * If `true`, the "Next" and "Previous" page links are shown.
+   */
+  @Input() directionLinks!: boolean;
+
+  /**
+   * Emitter to capture the information of the clicked row.
+   * */
   @Output() detailsEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   collapseStates: { [key: number]: boolean } = {};
 
 
   constructor(private cdr: ChangeDetectorRef) {
-  }
-
-  ngOnInit(): void {
   }
 
   toggleCollapse(row: any, rowId: number) {
@@ -95,12 +115,7 @@ export class ExpandableTableComponent implements AfterViewInit{
     }
     this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
   }
-
   changePage() {
     this.initiateCollapse();
-  }
-
-  clickNow(detail: any) {
-    console.log(detail);
   }
 }

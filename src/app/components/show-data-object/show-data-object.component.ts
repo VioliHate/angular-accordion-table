@@ -8,30 +8,32 @@ import {Header} from "../../models/header";
 })
 export class ShowDataObjectComponent {
 
-  @Input() data!: any[];
+  /**
+   * The data details to display
+   * */
+  @Input() dataDetails!: any[];
 
   /**
-   * che informazioni voglio mostrare e che nome devo mostrare
+   * The details to be displayed: attribute or path
+   * For "path", it means the path to the attribute in the JSON. For example, if my structure is:
+   * "contact": {
+   *     "email": "mario.rossi@example.com",
+   *     "phone": {
+   *         "prefix": "+39",
+   *         "number": "0123456789"
+   *     }
+   * }
+   * To display the value of "number," you just need to insert "contact.phone.number."
    * */
   @Input() deepDisplay!: Header[]
+
   protected readonly Object = Object;
 
   isObject(input: any) {
     return typeof input === 'object';
   }
 
-  displayKey(key: string): any {
-    return this.deepDisplay.find(iter => {
-      debugger;
-      if (iter && iter.value === key) {
-        return iter.name;
-      }
-      return false;
-    });
-  }
-
   getValueByPath(obj: any, path: string): any {
-    debugger;
     const parts = path.split('.');
     let value = obj;
     for (const part of parts) {
@@ -39,7 +41,6 @@ export class ShowDataObjectComponent {
         value = value[part];
       }
     }
-    console.log(value);
     return value;
   }
 }

@@ -41,11 +41,6 @@ export class DashboardComponent implements OnInit{
     this.data = this.userService.getAllUser();
   }
 
-
-  isObject(input: any) {
-    return typeof input === 'object';
-  }
-
   protected readonly Object = Object;
 
   getDetails($event:any) {

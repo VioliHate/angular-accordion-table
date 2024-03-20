@@ -1,6 +1,6 @@
 <div *ngFor="let path of deepDisplay">
-  <div *ngIf="!isObject(getValueByPath(data, path.value))">
-    {{ path.name }} : {{ getValueByPath(data, path.value) }}
+  <div *ngIf="!isObject(getValueByPath(dataDetails, path.value))">
+    {{ path.name }} : {{ getValueByPath(dataDetails, path.value) }}
   </div>
 </div>
 
