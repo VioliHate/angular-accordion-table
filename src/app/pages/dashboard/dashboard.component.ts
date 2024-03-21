@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit{
   extras: Header[] = [];
   deepDisplay: Header[] = [];
   dataDetails: any [] = [];
+  pageSize: number = 2;
+  page:number = 1;
+  maxSize: number = 5;
+
 
   constructor(private userService: UserService) {
     this.headers = [
@@ -39,7 +43,7 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.data = this.userService.getAllUser();
+    this.data = this.userService.getDataPaged(this.userService.getAllUser(),this.page,this.pageSize);
   }
 
   protected readonly Object = Object;
@@ -48,7 +52,7 @@ export class DashboardComponent implements OnInit{
     this.dataDetails = [this.userService.getUserDetails($event.id)];
   }
 
-  printInfo($event: SortEvent) {
-    console.log($event);
+  sortData($event: SortEvent) {
+    this.data = this.userService.sortDataByColumn(this.page,this.pageSize, $event);
   }
 }

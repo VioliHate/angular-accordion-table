@@ -119,14 +119,6 @@ export class ExpandableTableComponent implements AfterViewInit{
     this.initiateCollapse();
   }
 
-
-  getDataPaged(): any[] {
-    const startIndex = (this.page - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.data.slice(startIndex, endIndex);
-  }
-
-
   private initiateCollapse(){
     for (let i = 0; i < this.data.length; i++) {
       this.collapseStates[i] = true; // Inizializza tutti i collapse come aperti
@@ -153,6 +145,8 @@ export class ExpandableTableComponent implements AfterViewInit{
       this.sortEvent.sortDirection = SortDirection.ASCENDING;
     }
 
+    this.initiateCollapse();
+
     // Emit the sort change event
     this.sortableEmitter.emit({
       sortColumn: this.sortEvent.sortColumn,
@@ -160,5 +154,19 @@ export class ExpandableTableComponent implements AfterViewInit{
     });
   }
 
+  getValueByPath(obj: any, path: string): any {
+    const parts = path.split('.');
+    let value = obj;
+    for (const part of parts) {
+      if (value.hasOwnProperty(part)) {
+        value = value[part];
+      }
+    }
+    return value;
+  }
+
+  isObject(input: any) {
+    return typeof input === 'object';
+  }
   protected readonly SortDirection = SortDirection;
 }

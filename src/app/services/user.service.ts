@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {User} from "../models/example-model";
+import {SortDirection, SortEvent} from "../models/sort-event";
 
 @Injectable({
   providedIn: 'root'
@@ -204,5 +205,41 @@ export class UserService {
       }
     }
     return null;
+  }
+
+
+  getDataPaged(data:any[], page:number, pageSize:number): any[] {
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return data.slice(startIndex, endIndex);
+  }
+
+  sortDataByColumn(page:number, pageSize:number, sortEvent:SortEvent){
+    let sorted = this.user;
+    switch (sortEvent.sortDirection) {
+      case SortDirection.ASCENDING:
+        sorted.sort((a: any, b: any) => this.compareType(a,b,sortEvent.sortColumn));
+        break;
+      case SortDirection.DESCENDING:
+        sorted.sort((a: any, b: any) => this.compareType(b,a,sortEvent.sortColumn));
+        break;
+      case SortDirection.NONE:
+        sorted = this.user;
+        break;
+    }
+    return this.getDataPaged(sorted, page,pageSize);
+  }
+
+
+  private compareType(a:any,b:any, column:string){
+    if (typeof a[column] === "number" && typeof b[column] === "number") {
+      return a[column]  - b[column];
+    } else if (typeof a[column]  === "string" && typeof b[column]  === "string") {
+      return a[column].localeCompare(b[column]);
+    } else if (a[column]  instanceof Date && b[column]  instanceof Date) {
+      return a[column].getTime() - b[column].getTime();
+    } else {
+      return 0;
+    }
   }
 }

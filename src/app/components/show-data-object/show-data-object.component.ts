@@ -25,22 +25,16 @@ export class ShowDataObjectComponent {
    * }
    * To display the value of "number," you just need to insert "contact.phone.number."
    * */
-  @Input() deepDisplay!: Header[]
+  @Input() deepDisplay!: Header[];
 
-  protected readonly Object = Object;
+  /**
+   * function for check data is object, if true getting value from attribute path
+   */
+  @Input() isObject:any;
 
-  isObject(input: any) {
-    return typeof input === 'object';
-  }
+  /**
+   * function for take the value from attribute path
+   */
+  @Input() getValueByPath:any;
 
-  getValueByPath(obj: any, path: string): any {
-    const parts = path.split('.');
-    let value = obj;
-    for (const part of parts) {
-      if (value.hasOwnProperty(part)) {
-        value = value[part];
-      }
-    }
-    return value;
-  }
 }
