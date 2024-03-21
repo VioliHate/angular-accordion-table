@@ -2,6 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Header} from "../../models/header";
 import {TableHeadTheme} from "twentyfive-style";
+import {SortDirection, SortEvent} from "../../models/sort-event";
 
 @Component({
   selector: 'app-expandable-table',
@@ -45,6 +46,11 @@ export class ExpandableTableComponent implements AfterViewInit{
    * */
   @Input() singleOpen: boolean = false;
 
+  /**
+   * If true, the table accept sort on header table
+   */
+  @Input()  isSortable!: boolean;
+
   // ngb-pagination
   /**
    * The maximum number of pages to display.
@@ -77,8 +83,19 @@ export class ExpandableTableComponent implements AfterViewInit{
    * */
   @Output() detailsEmitter: EventEmitter<any> = new EventEmitter<any>();
 
+  /**
+   * If variable isSortable is true, this emitting the information of column header clicked
+   * and the order to be applied
+   */
+  @Output() sortableEmitter = new EventEmitter<SortEvent>();
+
+
   collapseStates: { [key: number]: boolean } = {};
 
+  sortEvent: SortEvent = {
+    sortColumn: '',
+    sortDirection: ''
+  }
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -121,4 +138,27 @@ export class ExpandableTableComponent implements AfterViewInit{
   }
 
   protected readonly TableHeadTheme = TableHeadTheme;
+
+  sortingColumn(column: any): void {
+    if (this.sortEvent.sortColumn === column) {
+      if(this.sortEvent.sortDirection === SortDirection.DESCENDING){
+        this.sortEvent.sortDirection = SortDirection.NONE;
+      }else{
+       this.sortEvent.sortDirection = this.sortEvent.sortDirection === SortDirection.ASCENDING ?
+         SortDirection.DESCENDING : SortDirection.ASCENDING;
+      }
+    } else {
+      // Set to ascending if a different column is clicked
+      this.sortEvent.sortColumn = column;
+      this.sortEvent.sortDirection = SortDirection.ASCENDING;
+    }
+
+    // Emit the sort change event
+    this.sortableEmitter.emit({
+      sortColumn: this.sortEvent.sortColumn,
+      sortDirection: this.sortEvent.sortDirection
+    });
+  }
+
+  protected readonly SortDirection = SortDirection;
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
 import {UserService} from "../../services/user.service";
+import {SortEvent} from "../../models/sort-event";
 
 @Component({
   selector: 'app-dashboard',
@@ -45,5 +46,9 @@ export class DashboardComponent implements OnInit{
 
   getDetails($event:any) {
     this.dataDetails = [this.userService.getUserDetails($event.id)];
+  }
+
+  printInfo($event: SortEvent) {
+    console.log($event);
   }
 }

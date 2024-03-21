@@ -6,7 +6,9 @@
   [singleOpen]="true"
   [templateRef]="templateRef"
   (detailsEmitter)="getDetails($event)"
-  [dataDetails]="dataDetails">
+  [dataDetails]="dataDetails"
+  [isSortable]="true"
+  (sortableEmitter)="printInfo($event)">
   </app-expandable-table>
 </div>
 
