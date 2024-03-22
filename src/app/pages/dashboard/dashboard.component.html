@@ -11,7 +11,10 @@
   (sortableEmitter)="sortData($event)"
   [page]="page"
   [pageSize]="pageSize"
-  [maxSize]="maxSize">
+  [maxSize]="maxSize"
+  [collectionSize]="collectionSize"
+  (changePageEmitter)="changePage($event)"
+  (selectEmitter)="selectSize($event)">
   </app-expandable-table>
 </div>
 

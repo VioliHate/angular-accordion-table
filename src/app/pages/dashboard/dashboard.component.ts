@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit{
   pageSize: number = 2;
   page:number = 1;
   maxSize: number = 5;
+  collectionSize!: number;
 
 
   constructor(private userService: UserService) {
@@ -43,7 +44,8 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.data = this.userService.getDataPaged(this.userService.getAllUser(),this.page,this.pageSize);
+    this.data = this.getData();
+    this.collectionSize = this.userService.getAllUser().length;
   }
 
   protected readonly Object = Object;
@@ -54,5 +56,18 @@ export class DashboardComponent implements OnInit{
 
   sortData($event: SortEvent) {
     this.data = this.userService.sortDataByColumn(this.page,this.pageSize, $event);
+  }
+
+   getData(page?: number){
+     return this.userService.getDataPaged(this.userService.getAllUser(),page? page: 1,this.pageSize);
+   }
+
+  changePage($event: number) {
+    this.data = this.getData($event);
+  }
+
+  selectSize($event: number) {
+    this.pageSize = $event;
+    this.data = this.getData(this.page);
   }
 }

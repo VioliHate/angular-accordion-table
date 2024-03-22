@@ -34,14 +34,14 @@
 </table>
 <div class="d-flex justify-content-between p-2 align-content-center">
   <ngb-pagination
-    [collectionSize]="data.length"
+    [collectionSize]="collectionSize"
     [(page)]="page"
     [maxSize]="maxSize"
     [pageSize]="pageSize"
     [rotate]="true"
-    (pageChange)="changePage()">
+    (pageChange)="changePage($event)">
   </ngb-pagination>
-  <select name="pageSize" [(ngModel)]="pageSize" class="btn btn-primary">
+  <select name="pageSize" [(ngModel)]="pageSize" (change)="selectSize(pageSize)" class="btn btn-primary">
     <option [ngValue]="2">2</option>
     <option [ngValue]="4">4</option>
     <option [ngValue]="10">10</option>

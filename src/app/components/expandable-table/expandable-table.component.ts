@@ -60,6 +60,12 @@ export class ExpandableTableComponent implements AfterViewInit{
    * The number of items per page.
    */
   @Input() pageSize: number = 2;
+
+  /**
+   * Total element of data
+   */
+  @Input() collectionSize!: any;
+
   /**
    * The current page.
    * Page numbers start with 1.
@@ -88,6 +94,10 @@ export class ExpandableTableComponent implements AfterViewInit{
    * and the order to be applied
    */
   @Output() sortableEmitter = new EventEmitter<SortEvent>();
+
+  @Output() changePageEmitter = new EventEmitter<number>();
+
+  @Output() selectEmitter = new EventEmitter<number>();
 
 
   collapseStates: { [key: number]: boolean } = {};
@@ -120,14 +130,20 @@ export class ExpandableTableComponent implements AfterViewInit{
   }
 
   private initiateCollapse(){
-    for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < this.collectionSize; i++) {
       this.collapseStates[i] = true; // Inizializza tutti i collapse come aperti
     }
     this.cdr.detectChanges(); // Forza una nuova esecuzione della change detection
   }
-  changePage() {
+  changePage(clickedPage: number) {
     this.initiateCollapse();
+    this.changePageEmitter.emit(clickedPage);
   }
+    selectSize(selectSize: number) {
+    this.initiateCollapse();
+    this.selectEmitter.emit(selectSize);
+  }
+
 
   protected readonly TableHeadTheme = TableHeadTheme;
 
