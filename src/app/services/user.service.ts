@@ -7,7 +7,8 @@ import {SortDirection, SortEvent} from "../models/sort-event";
 })
 export class UserService {
 
-  user: User[]= []
+  user: User[]= [];
+
   constructor() {
     this.user = [
       {
@@ -215,19 +216,19 @@ export class UserService {
   }
 
   sortDataByColumn(page:number, pageSize:number, sortEvent:SortEvent){
-    let sorted = this.user;
+    let sort:any [] = [];
     switch (sortEvent.sortDirection) {
       case SortDirection.ASCENDING:
-        sorted.sort((a: any, b: any) => this.compareType(a,b,sortEvent.sortColumn));
+        sort = this.user.slice().sort((a: any, b: any) => this.compareType(a,b,sortEvent.sortColumn));
         break;
       case SortDirection.DESCENDING:
-        sorted.sort((a: any, b: any) => this.compareType(b,a,sortEvent.sortColumn));
+        sort = this.user.slice().sort((a: any, b: any) => this.compareType(b,a,sortEvent.sortColumn));
         break;
       case SortDirection.NONE:
-        sorted = this.user;
+        sort = this.user;
         break;
     }
-    return this.getDataPaged(sorted, page,pageSize);
+    return this.getDataPaged(sort, page,pageSize);
   }
 
 
