@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,6 @@ import { ShowDataObjectComponent } from './components/show-data-object/show-data
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {TwentyfiveSpinnerModule} from "twentyfive-spinner";
 
 @NgModule({
   declarations: [
@@ -27,10 +26,10 @@ import {TwentyfiveSpinnerModule} from "twentyfive-spinner";
     CollapseModule.forRoot(),
     NgbPagination,
     FormsModule,
-    HttpClientModule,
-    TwentyfiveSpinnerModule
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit{
   headers: Header[] = [];
   extras: Header[] = [];
   deepDisplay: Header[] = [];
-  dataDetails: any [] = [];
+  dataDetails: any [] = [new User()];
   pageSize: number = 2;
   page:number = 1;
   maxSize: number = 5;

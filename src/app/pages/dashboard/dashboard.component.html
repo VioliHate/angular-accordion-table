@@ -20,8 +20,7 @@
 
 
 <!-- Template reference to display the information specified in deepDisplay. -->
-<ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" let-getValueByPath="getValueByPath"
-             let-isObject="isObject">
+<ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" let-getValueByPath="getValueByPath" let-isObject="isObject">
     <p>
       <span>{{detailLabel?.name}}</span> :
       <app-show-data-object [dataDetails]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"
