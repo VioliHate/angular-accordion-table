@@ -10,6 +10,7 @@ import {CollapseModule} from "ngx-bootstrap/collapse";
 import { ShowDataObjectComponent } from './components/show-data-object/show-data-object.component';
 import {NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {FormsModule} from "@angular/forms";
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     NgbPagination,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
 import {UserService} from "../../services/user.service";
 import {SortEvent} from "../../models/sort-event";
+import {User} from "../../models/example-model";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit{
 
   @ViewChild('templateRef', { static: true }) templateRef!: TemplateRef<any>;
 
-  data:any [] = [];
+  data:User [] = [];
   headers: Header[] = [];
   extras: Header[] = [];
   deepDisplay: Header[] = [];
@@ -26,13 +27,13 @@ export class DashboardComponent implements OnInit{
   constructor(private userService: UserService) {
     this.headers = [
       {name: 'ID', value:'id'},
-      {name: 'Nome', value: 'firstName'},
-      {name: 'Cognome', value: 'lastName'},
-      {name: 'Data di nascita', value: 'birthDate'}
+      {name: 'Nome', value: 'name'},
+      {name: 'Username', value: 'username'},
+      {name: 'Email', value: 'email'}
     ];
 
     this.extras = [
-      {name: 'Contatto', value: 'contact'},
+      {name: 'Company', value: 'company'},
       {name: 'Indirizzo', value: 'address'}
     ];
 
@@ -41,11 +42,12 @@ export class DashboardComponent implements OnInit{
       {name: 'Telefono', value:'contact.phone.number'},
       {name: 'Via', value:'address.street'},
     ]
+
+    this.collectionSize = 10;
   }
 
   ngOnInit(): void {
-    this.data = this.getData();
-    this.collectionSize = this.userService.getAllUser().length;
+    this.getData();
   }
 
   protected readonly Object = Object;
@@ -59,15 +61,19 @@ export class DashboardComponent implements OnInit{
   }
 
    getData(page?: number){
-     return this.userService.getDataPaged(this.userService.getAllUser(),page? page: 1,this.pageSize);
+     this.userService.getData(page? page:1,this.pageSize).subscribe((resp: any)=>{
+        this.data = resp;
+        console.log(resp);
+     })
    }
 
   changePage($event: number) {
-    this.data = this.getData($event);
+    this.page = $event;
+    this.getData(this.page);
   }
 
   selectSize($event: number) {
     this.pageSize = $event;
-    this.data = this.getData(this.page);
+    this.getData();
   }
 }

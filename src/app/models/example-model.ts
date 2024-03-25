@@ -1,50 +1,60 @@
-export class Address {
-  street: string;
-  city: string;
-  postalCode: string;
+class Geo {
+  lat: string;
+  lng: string;
 
   constructor() {
-    this.street = '';
-    this.city = '';
-    this.postalCode = '';
+    this.lat = '';
+    this.lng = ''
   }
 }
 
-export class Contact {
-  email: string;
-  phone: Phone;
+class Address {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: Geo;
 
   constructor() {
-    this.email = '';
-    this.phone = new Phone();
+    this.street = '';
+    this.suite = '';
+    this.city = '';
+    this.zipcode = '';
+    this.geo = new Geo();
+  }
+}
+
+class Company {
+  name: string;
+  catchPhrase: string
+  bs: string;
+
+  constructor() {
+    this.name = '';
+    this.catchPhrase = '';
+    this.bs = '';
   }
 }
 
 export class User {
   id: number;
-  firstName: string;
-  lastName: string;
-  birthDate: string;
+  name: string;
+  username: string;
+  email: string;
   address: Address;
-  contact: Contact;
+  phone: string;
+  website: string;
+  company: Company;
+
 
   constructor() {
-    this.id = 0 ;
-    this.firstName = '';
-    this.lastName = '';
-    this.birthDate = '';
-    this.address = {street:'', city:'', postalCode:''};
-    this.contact = {email:'', phone: new Phone()};
+    this.id= 0;
+    this.name='';
+    this.username='';
+    this.email='';
+    this.address = new Address();
+    this.phone='';
+    this.website='';
+    this.company= new Company();
   }
 }
-
-export class Phone {
-  prefix: string;
-  number: string;
-
-  constructor() {
-    this.prefix = '';
-    this.number = '';
-  }
-}
-

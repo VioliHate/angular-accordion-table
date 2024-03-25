@@ -163,7 +163,6 @@ export class ExpandableTableComponent implements AfterViewInit{
 
     this.initiateCollapse();
 
-    // Emit the sort change event
     this.sortableEmitter.emit({
       sortColumn: this.sortEvent.sortColumn,
       sortDirection: this.sortEvent.sortDirection
