@@ -99,6 +99,9 @@ export class ExpandableTableComponent implements AfterViewInit{
 
   @Output() selectEmitter = new EventEmitter<number>();
 
+  @Output() detailsUpdate: EventEmitter<any> = new EventEmitter<any>();
+
+
 
   collapseStates: { [key: number]: boolean } = {};
 

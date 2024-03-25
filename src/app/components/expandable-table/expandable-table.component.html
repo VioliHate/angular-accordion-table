@@ -3,9 +3,11 @@
   <tr>
     <th *ngFor="let header of headers" scope="col" (click)="isSortable ? sortingColumn(header.value) : null"
         [ngStyle]="{'cursor': isSortable ? 'pointer' : 'default'}">{{header.name}}
+      <ng-container *ngIf="isSortable">
       <span *ngIf="sortEvent.sortColumn === header.value && sortEvent.sortDirection === SortDirection.ASCENDING" class="bi bi-arrow-down text-white"></span>
       <span *ngIf="sortEvent.sortColumn === header.value && sortEvent.sortDirection === SortDirection.DESCENDING" class="bi bi-arrow-up text-white"></span>
       <span *ngIf="sortEvent.sortDirection === SortDirection.NONE" class="bi bi-arrow-down-up text-white"></span>
+      </ng-container>
     </th>
   </tr>
   </thead>

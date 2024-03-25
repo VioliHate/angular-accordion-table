@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Header} from "../../models/header";
 import {UserService} from "../../services/user.service";
 import {SortEvent} from "../../models/sort-event";
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit{
   page:number = 1;
   maxSize: number = 5;
   collectionSize!: number;
+  loading: boolean = false;
 
 
   constructor(private userService: UserService) {
@@ -33,14 +34,17 @@ export class DashboardComponent implements OnInit{
     ];
 
     this.extras = [
-      {name: 'Company', value: 'company'},
+      {name: 'Azienda', value: 'company'},
+      {name: 'Telefono', value: 'phone'},
       {name: 'Indirizzo', value: 'address'}
     ];
 
     this.deepDisplay = [
-      {name: 'Email', value:'contact.email'},
-      {name: 'Telefono', value:'contact.phone.number'},
+      {name: 'Nome', value:'company.name'},
       {name: 'Via', value:'address.street'},
+      {name: 'Città', value:'address.city'},
+      {name: 'Latitudine', value:'address.geo.lat'},
+      {name: 'Longitudine', value:'address.geo.lng'}
     ]
 
     this.collectionSize = 10;
@@ -53,7 +57,11 @@ export class DashboardComponent implements OnInit{
   protected readonly Object = Object;
 
   getDetails($event:any) {
-    this.dataDetails = [this.userService.getUserDetails($event.id)];
+    this.loading = true;
+    this.userService.getUserDetails($event).subscribe((response:any)=>{
+      this.dataDetails = response;
+      this.loading = false;
+    })
   }
 
   sortData($event: SortEvent) {

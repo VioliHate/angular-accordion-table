@@ -1,29 +1,30 @@
 <div class="container">
   <app-expandable-table
-  [data]="data"
-  [headers]="headers"
-  [extras]="extras"
-  [singleOpen]="true"
-  [templateRef]="templateRef"
-  (detailsEmitter)="getDetails($event)"
-  [dataDetails]="dataDetails"
-  [isSortable]="true"
-  (sortableEmitter)="sortData($event)"
-  [page]="page"
-  [pageSize]="pageSize"
-  [maxSize]="maxSize"
-  [collectionSize]="collectionSize"
-  (changePageEmitter)="changePage($event)"
-  (selectEmitter)="selectSize($event)">
+    [data]="data"
+    [headers]="headers"
+    [extras]="extras"
+    [singleOpen]="true"
+    [templateRef]="templateRef"
+    (detailsEmitter)="getDetails($event)"
+    [dataDetails]="dataDetails"
+    [isSortable]="false"
+    (sortableEmitter)="sortData($event)"
+    [page]="page"
+    [pageSize]="pageSize"
+    [maxSize]="maxSize"
+    [collectionSize]="collectionSize"
+    (changePageEmitter)="changePage($event)"
+    (selectEmitter)="selectSize($event)">
   </app-expandable-table>
 </div>
 
 
 <!-- Template reference to display the information specified in deepDisplay. -->
-<ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" let-getValueByPath="getValueByPath" let-isObject="isObject">
-  <p>
-    <span>{{detailLabel?.name}}</span> :
-    <app-show-data-object [dataDetails]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"
-    [getValueByPath]="getValueByPath" [isObject]="isObject"></app-show-data-object>
-  </p>
+<ng-template #templateRef let-detailLabel="detailLabel" let-detailInfo="detailInfo" let-getValueByPath="getValueByPath"
+             let-isObject="isObject">
+    <p>
+      <span>{{detailLabel?.name}}</span> :
+      <app-show-data-object [dataDetails]="detailInfo[detailLabel?.value]" [deepDisplay]="deepDisplay"
+                            [getValueByPath]="getValueByPath" [isObject]="isObject"></app-show-data-object>
+    </p>
 </ng-template>

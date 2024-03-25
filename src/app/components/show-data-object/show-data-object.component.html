@@ -1,6 +1,11 @@
+<ng-container *ngIf="!isObject(dataDetails)">
+  {{dataDetails}}
+</ng-container>
+<ng-container *ngIf="isObject(dataDetails)">
 <div *ngFor="let path of deepDisplay">
-  <div *ngIf="!isObject(getValueByPath(dataDetails, path.value))">
-    {{ path.name }} : {{ getValueByPath(dataDetails, path.value) }}
-  </div>
+  <ul *ngIf="isObject(dataDetails) && !isObject(getValueByPath(dataDetails, path.value))">
+    <li>{{ path.name }} : {{ getValueByPath(dataDetails, path.value) }}</li>
+  </ul>
 </div>
+</ng-container>
 

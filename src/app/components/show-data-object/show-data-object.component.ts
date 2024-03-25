@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Header} from "../../models/header";
 
 @Component({
@@ -6,7 +6,7 @@ import {Header} from "../../models/header";
   templateUrl: './show-data-object.component.html',
   styleUrl: './show-data-object.component.scss'
 })
-export class ShowDataObjectComponent {
+export class ShowDataObjectComponent{
 
   /**
    * The data details to display
@@ -35,6 +35,6 @@ export class ShowDataObjectComponent {
   /**
    * function for take the value from attribute path
    */
-  @Input() getValueByPath:any;
+  @Input() getValueByPath!:(data: any, path: string) => any;
 
 }
