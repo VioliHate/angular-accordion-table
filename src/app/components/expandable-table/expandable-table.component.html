@@ -11,7 +11,7 @@
     </th>
   </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="data.length > 0">
   <ng-container *ngFor="let row of data; let i = index">
     <tr data-toggle="collapse" [attr.data-target]="'#rowDetails' + i" aria-expanded="false" aria-controls="rowDetails"
         (click)="toggleCollapse(row, i)">
@@ -33,8 +33,13 @@
     </tr>
   </ng-container>
   </tbody>
+  <tbody *ngIf="data.length === 0" class="text-center">
+  <tr>
+    <td [attr.colspan]="headers.length">Non ci sono Dati da visualizzare</td>
+  </tr>
+  </tbody>
 </table>
-<div class="d-flex justify-content-between p-2 align-content-center">
+<div class="d-flex justify-content-between p-2 align-content-center" *ngIf="data.length > 0">
   <ngb-pagination
     [collectionSize]="collectionSize"
     [(page)]="page"
