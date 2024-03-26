@@ -36,5 +36,6 @@ export class ShowDataObjectComponent{
    * function for take the value from attribute path
    */
   @Input() getValueByPath!:(data: any, path: string) => any;
+  @Input() loading!: boolean;
 
 }
